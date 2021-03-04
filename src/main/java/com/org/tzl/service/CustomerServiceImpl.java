@@ -45,4 +45,10 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		 return customerRepo.deleteByCustomerId(customerId);
 	}
+
+	@Override
+	public CustomerEntity findByAPIKey(String apiKey) {
+		// TODO Auto-generated method stub
+		return customerRepo.findByApiKey(apiKey);
+	}
 }

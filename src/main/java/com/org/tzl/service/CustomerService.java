@@ -8,4 +8,5 @@ public interface CustomerService {
     CustomerEntity findByCustomerId(int id);
     CustomerEntity updateCustomer(CustomerEntity customerEntity);
     CustomerEntity deleteCustomer(String customerId);
+    CustomerEntity findByAPIKey(String apiKey);
 }

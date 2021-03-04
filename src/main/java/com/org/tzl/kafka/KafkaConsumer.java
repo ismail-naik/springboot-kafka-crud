@@ -21,7 +21,7 @@ public class KafkaConsumer {
     CustomerService customerService;
 
 
-    private CustomerEntity custEntityKafka = new CustomerEntity();
+   // private CustomerEntity custEntityKafka = new CustomerEntity();
 
     @KafkaListener(topics = "kafka.post.customer", groupId = "customers")
     public void processPostBrand(String customerJSON){
@@ -37,36 +37,30 @@ public class KafkaConsumer {
         }
     }
 
-    @KafkaListener(topics = "kafka.put.customer" , groupId = "customers")
-    public void processPutCustomer(String customerJSON){
-        logger.info("received content = '{}'", customerJSON);
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            CustomerEntity customer = mapper.readValue(customerJSON, CustomerEntity.class);
-            custEntityKafka = customer;
-            logger.info("Success process brand '{}' with topic '{}'", customer.getFirstName(), "customers.kafka.put");
-        } catch (Exception e){
-            logger.error("An error occurred! '{}'", e.getMessage());
-        }
-    }
-
-    public CustomerEntity getCustomerEntityKafka(int id){
-        return custEntityKafka;
-    }
-
-
-    @KafkaListener(topics = "kafka.patch.customer", groupId = "customers")
-    public void processPatchCustomer(String customerJSON){
-        logger.info("received content = '{}'", customerJSON);
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            CustomerEntity customerEntity = mapper.readValue(customerJSON, CustomerEntity.class);
-            CustomerEntity customer = customerService.updateCustomer(customerEntity);
-            logger.info("Success process brand '{}' with topic '{}'", customer.getFirstName(), "customers.kafka.patch");
-        } catch (Exception e){
-            logger.error("An error occurred! '{}'", e.getMessage());
-        }
-    }
+	/*
+	 * @KafkaListener(topics = "kafka.put.customer" , groupId = "customers") public
+	 * void processPutCustomer(String customerJSON){
+	 * logger.info("received content = '{}'", customerJSON); try{ ObjectMapper
+	 * mapper = new ObjectMapper(); CustomerEntity customer =
+	 * mapper.readValue(customerJSON, CustomerEntity.class); custEntityKafka =
+	 * customer; logger.info("Success process brand '{}' with topic '{}'",
+	 * customer.getFirstName(), "customers.kafka.put"); } catch (Exception e){
+	 * logger.error("An error occurred! '{}'", e.getMessage()); } }
+	 * 
+	 * public CustomerEntity getCustomerEntityKafka(int id){ return custEntityKafka;
+	 * }
+	 * 
+	 * 
+	 * @KafkaListener(topics = "kafka.patch.customer", groupId = "customers") public
+	 * void processPatchCustomer(String customerJSON){
+	 * logger.info("received content = '{}'", customerJSON); try{ ObjectMapper
+	 * mapper = new ObjectMapper(); CustomerEntity customerEntity =
+	 * mapper.readValue(customerJSON, CustomerEntity.class); CustomerEntity customer
+	 * = customerService.updateCustomer(customerEntity);
+	 * logger.info("Success process brand '{}' with topic '{}'",
+	 * customer.getFirstName(), "customers.kafka.patch"); } catch (Exception e){
+	 * logger.error("An error occurred! '{}'", e.getMessage()); } }
+	 */
 
    
 }
